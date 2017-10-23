@@ -12,9 +12,11 @@
         $campos = ['*'];
         $result = $con->consultar($tabla, $campos, $condicion);
         $row_cnt = $result->num_rows;               
-        if ($row_cnt>0)            
+        if ($row_cnt>0){
+            $_SESSION['token']= md5($username).md5($password);            
             $datos = array(
                 'msg' => 'OK');
+        }
         else 
             $datos = array(
                 'msg' => 'Usuario/Password Incorrecto.');            
