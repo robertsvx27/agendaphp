@@ -20,7 +20,7 @@ class Login {
     form_data.append('username', $('#user').val())
     form_data.append('password', $('#password').val())
     $.ajax({
-      url: '../server/check_login.php',
+      url: 'server/check_login.php',
       dataType: "json",
       cache: false,
       processData: false,
@@ -28,14 +28,14 @@ class Login {
       data: form_data,
       type: 'POST',
       success: function(php_response){
-        if (php_response.msg == "OK") {
+        if (php_response.msg === "OK") {
           window.location.href = 'main.html';
         }else {
-          alert(php_response.msg);
+          alert(php_response.msg);          
         }
       },
-      error: function(){
-        alert("error en la comunicación con el servidor");
+      error: function(data, textStatus, errorThrown){
+       alert("error en la comunicación con el servidor")       
       }
     })
   }

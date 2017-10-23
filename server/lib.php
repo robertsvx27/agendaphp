@@ -75,6 +75,35 @@
 
     }
 
+    function consultar($tablas, $campos, $condicion = ""){
+      $sql = "SELECT ";
+      $array = array_keys($campos);
+      $ultima_key = end($array);
+      foreach ($campos as $key => $value) {
+        $sql .= $value;
+        if ($key!=$ultima_key) {
+          $sql.=", ";
+        }else $sql .=" FROM ";
+      }
+
+      $array = array_keys($tablas);
+      $ultima_key = end($array);
+      foreach ($tablas as $key => $value) {
+        $sql .= $value;
+        if ($key!=$ultima_key) {
+          $sql.=", ";
+        }else $sql .= " ";
+      }
+
+      if ($condicion == "") {
+        $sql .= ";";
+      }else {
+        $sql .= " where ".$condicion.";";
+      }
+
+      return $this->ejecutarQuery($sql);
+    }
+
     function getConexion(){
       return $this->conexion;
     }
